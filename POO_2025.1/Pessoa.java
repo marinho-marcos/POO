@@ -16,7 +16,7 @@ public class Pessoa {
 
     //métodos
     public void falar(){
-        System.out.println("olá mundo! eu sou o " + nome + " e tenho " + idade + " anos");
+        //System.out.println("olá mundo! eu sou o " + nome + " e tenho " + idade + " anos");
         System.out.printf("Olá mundo! eu sou o %s e tenho %d anos", nome, idade);       //
     }
 

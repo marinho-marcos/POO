@@ -6,17 +6,18 @@ public class Principal {
 
         Carro carro1 = new Carro("ford", "ka", 2020);
         carro1.exibirDados();
+
+        System.err.println("\n");
+        
         int vezes = 0;
-        while(vezes < 5) {
+        while(vezes < 3) {
             carro1.acelerar();
             carro1.exibirDados();
             vezes++;
         }
 
-        while(carro1.getVelocidade() > 0){
-            carro1.frear();
-            carro1.exibirDados();
-        }
+        System.err.println("\n");
+        carro1.parar();
         
     }
 }

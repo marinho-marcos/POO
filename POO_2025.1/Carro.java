@@ -22,10 +22,10 @@ public class Carro {
         velocidade -= 10;
     }
 
-    public void parar(Carro carro){
-        while(carro.getVelocidade() > 0){
-            carro.frear();
-            carro.exibirDados();
+    public void parar(){
+        while(velocidade > 0){
+            frear();
+            exibirDados();
         }
     }
 
