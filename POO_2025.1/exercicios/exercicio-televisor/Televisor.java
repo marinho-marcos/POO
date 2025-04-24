@@ -3,10 +3,12 @@ public class Televisor {
     private int volume;
     private boolean ligado;
 
+    //CONSTRUTOR
     public Televisor(){
         ligado = false;
     }
-
+    
+    //GET E SET CANAL
     public int getCanal(){
         return canal;
     }
@@ -14,7 +16,8 @@ public class Televisor {
     public void setCanal(int canal){
         this.canal = canal;
     }
-
+    
+    //GET E SET VOLUME
     public int getVolume(){
         return volume;
     }
@@ -22,7 +25,8 @@ public class Televisor {
     public void setVolume(int volume){
         this.volume = volume;
     }
-
+    
+    //GET E SET LIGADO
     public boolean getLigado(){
         return ligado;
     }
@@ -35,7 +39,7 @@ public class Televisor {
         return String.format("\nCanal: %d\nVolume: %d\nLigado: %b\n", getCanal(), getVolume(), getLigado());
     }
 
-    public void ligarTv(int canal, int volume){
+    public void ligar(int canal, int volume){
         if(getLigado() == false){
             setLigado(true);
             setCanal(canal);
@@ -60,9 +64,31 @@ public class Televisor {
     public void aumentarVolume(){
         if(getLigado()){
             setVolume(getVolume() + 1);
-            System.out.println("Aumentando volume");
+            System.out.println("Aumentou o volume");
         } else{
             System.out.println("TV desligada. impossível aumentar o volume.");
+        }
+    }
+    
+    public void diminuirVolume(){
+        if(getLigado()){
+            setVolume(getVolume() - 1);
+            System.out.println("Diminuiu o volume");
+        } else{
+            System.out.println("TV desligada. impossível diminuir o volume.");
+        }
+    }
+    
+    public void mudarCanal(int canal){
+        if(getLigado()){
+            if(getCanal() == canal){
+                System.out.println("Você ja está no canal " + canal);
+            } else{
+                setCanal(canal);
+                System.out.println("Canal alterado para o " + canal);
+            }
+        } else{
+            System.out.println("TV desligada. Impossível alterar canal.");
         }
     }
 
