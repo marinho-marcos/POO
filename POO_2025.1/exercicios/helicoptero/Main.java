@@ -2,12 +2,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Frota frota1 = new Frota();
-
+        Scanner teclado = new Scanner(System.in);
+        
+        System.out.println("Informe quantos helicopteros a frota vai possuir: ");
+        int tamanhoFrota = teclado.nextInt();
+        teclado.nextLine(); //limpar buffer
+        
+        Frota frota = new Frota(tamanhoFrota);
+        
+        int opcaoMenu;
         do{
-            Scanner teclado = new Scanner(System.in);
-
-            int opcao = -1;
 
             System.out.println("\n----MENU----");
             System.out.println("1 - adicionar helicoptero");
@@ -17,83 +21,85 @@ public class Main {
             System.out.println("5 - sair pessoa");
             System.out.println("6 - decolar helicoptero");
             System.out.println("7 - aterrisar helicoptero");
-            System.out.println("8 - exibir helicoptero");
+            System.out.println("8 - exibir dados de um helicoptero");
+            System.out.println("9 - exibir frota completa");
             System.out.println("0 - sair");
 
-            System.out.println("escolha uma opcao: ");
-            opcao = teclado.nextInt();
+            System.out.println("\nescolha uma opcao: ");
+            opcaoMenu = teclado.nextInt();
+            teclado.nextLine(); //limpar buffer
 
-            switch (opcao) {
+            switch (opcaoMenu) {
+
                 case 1:
                     System.out.println("Informe o modelo: ");
-                    String modelo = teclado.nextLine();
+                    String modeloHelicoptero = teclado.nextLine();
                     System.out.println("informe a capacidade: ");
                     int capacidade = teclado.nextInt();
-                    Helicoptero novoHelicoptero = new Helicoptero(capacidade, modelo)
-                    frota1.cadastrarHelicoptero(novoHelicoptero);
+                    teclado.nextLine(); //limpar buffer
+                    Helicoptero modelo = new Helicoptero(capacidade, modeloHelicoptero);
+                    frota.addHelicoptero(modelo);
                     break;
 
                 case 2:
-                    frota1.ligarHelicoptero();
+                    System.out.println("Qual helicoptero deseja ligar?");
+                    int opcaoLigar = teclado.nextInt();
+                    frota.ligarHelicoptero(opcaoLigar - 1);
                     break;
-
-                case 3:
-                    frota1.desligarHelicoptero();
-                    break;
-
                     
+                case 3:
+                    System.out.println("Qual helicoptero deseja desligar?");
+                    int opcaoDesligar = teclado.nextInt();
+                    frota.desligarHelicoptero(opcaoDesligar - 1);
+                    break;
+
                 case 4:
-                    frota1.entrarPassageiro();
+                    System.out.println("Em qual helicoptero o passageiro vai entrar?");
+                    int opcaoEntrar = teclado.nextInt();
+                    frota.entrarPassageiro(opcaoEntrar - 1);
                     break;
 
                 case 5:
-                    frota1.sairPassageiro();
+                    System.out.println("De qual helicoptero o passageiro vai sair?");
+                    int opcaoSair = teclado.nextInt();
+                    frota.sairPassageiro(opcaoSair - 1);
                     break;
-
-                case 6:
                     
+                case 6:
+                    System.out.println("Qual helicoptero vai decolar?");
+                    int opcaoDecolar = teclado.nextInt();
+                    System.out.println("Informe a altitude: ");
+                    int altitude = teclado.nextInt();
+                    frota.decolar(altitude, opcaoDecolar  - 1);
+                    break;
+                    
+                case 7:
+                    System.out.println("Qual helicoptero vai aterrissar?");
+                    int opcaoAterrissar = teclado.nextInt();
+                    frota.aterrissar(opcaoAterrissar - 1);
+                    break;
+                    
+                case 8:
+                    System.out.println("Exibir dados de Qual helicoptero?");
+                    int opcaoDados = teclado.nextInt();
+                    frota.exibirHelicoptero(opcaoDados - 1);
+                    break;
+                    
+                case 9:
+                    frota.exibirFrota();
+                    break;
+                    
+                case 0:
+                    System.out.println("Encerrando sistema...");
+                    opcaoMenu = 0;
+                    break;
                     
                 default:
-                    break;
+                    System.out.println("Opção inválida");
             }
-        }
-
-        /* 
-        System.out.println(h1.toString());
-        System.out.println(h2.toString());
-
-        h1.entra();
-        h2.entra();
-
-        h1.entra();
-        h2.entra();
-
-        h1.entra();
-        h2.entra();
-
-        h1.ligar();
-        h2.ligar();
-
-
-        h1.decolar(500);
-        h2.decolar(800);
-
-        System.out.println(h1.toString());
-        System.out.println(h2.toString());
-
-        h1.aterrissar();
-        h2.aterrissar();
-
-        h1.desligar();
-        h2.desligar();
-
-        h1.sair();
-        h2.sair();
-
-        System.out.println(h1.toString());
-        System.out.println(h2.toString());
-
-        */
+        } while(opcaoMenu != 0);
+        
+        teclado.close();
     }
     
 }

@@ -46,65 +46,66 @@ public class Helicoptero{
         this.quantidade = quantidade;
     }
 
-    public void ligar(){
+    public boolean ligar(){
         if(!getLigado()){
             setLigado(true);
-            System.out.println("Ligando helicoptero...\n");
+            return true;
         } else{
-            System.out.println("O helicoptero ja esta ligado!");
+            return false;
         }
     }
 
-    public void desligar(){
+    public boolean desligar(){
         if(getLigado() && getAltitude() == 0){
             setLigado(false);
-            System.out.println("Desligando helicoptero...\n");
+            return true;
         } else{
-            System.out.println("Impossivel desligar");
+            return false;
         }
     }
 
-    public void entra(){
+    public boolean entra(){
         if(getQuantidade() < getCapacidade()){
             setQuantidade(getQuantidade()+1);
-            System.out.println("Uma passageiro entrou\n");
+            return true;
         } else{
-            System.out.println("Helicoptero cheio!");
+            return false;
         }
     }
 
-    public void sair(){
+    public boolean sair(){
         if(getQuantidade() > 0 && getAltitude() == 0){
             int passageiros = getQuantidade();
             for(int i = 1; i <= passageiros; i++){
                 setQuantidade(getQuantidade() - 1);
                 System.out.println("O passageiro " + i + " saiu.");
             }
-            System.out.println("\n");
+            return true;
         } else{
-            System.out.println("Impossivel sair no momento...");
+            return false;
         }
     }
     
-
-    public void decolar(int altitude){
+    public boolean decolar(int altitude){
         if(getLigado() && getAltitude() == 0){
-            System.out.println("Decolando para altitude: " + altitude);
             setAltitude(altitude);
+            return true;
         } else{
-            System.out.println("Impossivel decolar!");
+            return false;
         }
     }
 
-    public void aterrissar(){
+    public boolean aterrissar(){
         if(getLigado() && getAltitude() > 0){
-            System.out.println("Aterrissando...\n");
             setAltitude(0);
+            return true;
+        } else{
+            return false;
         }
     }
 
     public String toString(){
-        return String.format("\nModelo: %s\nLigado: %b\nAltitude: %d\nCapacidade: %d\nQuantidade: %d\n", getLigado(), getAltitude(), getCapacidade(), getQuantidade());
+        return String.format("\nModelo: %s\nLigado: %b\nAltitude: %d\nCapacidade: %d\nQuantidade: %d\n", getModelo(), getLigado(), getAltitude(), getCapacidade(), getQuantidade());
     }
 
 }
