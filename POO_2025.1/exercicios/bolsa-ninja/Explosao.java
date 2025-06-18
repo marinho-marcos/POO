@@ -1,0 +1,5 @@
+// USANDO INTERFACE PARA METODO COMUM APENAS A ALGUMAS DAS CLASSES DA FAMILIA FERRAMENTA NINJA
+
+public interface Explosao{
+    void explodir();
+}
