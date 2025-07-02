@@ -1,0 +1,4 @@
+com\estoque\App.class
+util\ConexaoBD.class
+dao\ProdutoDAO.class
+model\Produto.class

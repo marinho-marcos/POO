@@ -1,0 +1,6 @@
+com\escola\App.class
+model\Curso.class
+dao\CursoDAO.class
+dao\AlunoDAO.class
+util\ConexaoBD.class
+model\Aluno.class
