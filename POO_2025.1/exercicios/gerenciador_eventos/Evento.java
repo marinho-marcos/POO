@@ -69,9 +69,13 @@ public class Evento {
         Set<Participante> participantesInicial = new HashSet<>();
 
         for(Participante p : participantes){
-            if(p.getNome().startsWith(String.valueOf(letra))){
+            if(p.getNome().toLowerCase().startsWith(String.valueOf(letra))){
                 participantesInicial.add(p);
             }
+        }
+
+        if(participantesInicial.isEmpty()){
+            System.out.println("\nNão existe participante com essa inicial!\n");
         }
 
         return participantesInicial;

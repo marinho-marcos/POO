@@ -13,13 +13,15 @@ public class SistemaEventos {
     }
 
     public void adicionarEvento(Evento e){
-        eventos.put(e.getNome(), e);
+        eventos.put(e.getNome().toLowerCase(), e);
         System.out.println("\nEvento " + e.getNome() + " adicionado com sucesso!");
     }
 
     public Evento buscarEventoPeloNome(String nome){
-        if(eventos.containsKey(nome)){
-           return eventos.get(nome); 
+        String chave = nome.toLowerCase();
+
+        if(eventos.containsKey(chave)){
+           return eventos.get(chave); 
         }
         
         System.out.println("Não existe evento com esse nome!\n");
@@ -31,6 +33,10 @@ public class SistemaEventos {
     
         for(String chave : eventos.keySet()){
             listaEventos.add(eventos.get(chave));
+        }
+
+        if(listaEventos.isEmpty()){
+            System.out.println("Não existe evento cadastrado\n");
         }
         
         return listaEventos;
