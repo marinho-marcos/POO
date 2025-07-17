@@ -62,4 +62,8 @@ public class Participante implements Comparable<Participante>{
         return nome.compareTo(outro.getNome());
     }
     
+    
+    public String toString(){
+        return String.format("Nome: %s | Telefone: %s | E-mail: %s%n", getNome(), getTelefone(), getEmail());
+    }
 }

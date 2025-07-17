@@ -14,15 +14,25 @@ public class SistemaEventos {
 
     public void adicionarEvento(Evento e){
         eventos.put(e.getNome(), e);
+        System.out.println("\nEvento " + e.getNome() + " adicionado com sucesso!");
     }
 
     public Evento buscarEventoPeloNome(String nome){
-        return eventos.get(nome);
+        if(eventos.containsKey(nome)){
+           return eventos.get(nome); 
+        }
+        
+        System.out.println("Não existe evento com esse nome!\n");
+        return null;
     }
 
     public List<Evento> listarEventos(){
-        Set<Evento> listaEventos = new HashSet<>();
-
-        for()
+        List<Evento> listaEventos = new ArrayList<>();
+    
+        for(String chave : eventos.keySet()){
+            listaEventos.add(eventos.get(chave));
+        }
+        
+        return listaEventos;
     }
 }

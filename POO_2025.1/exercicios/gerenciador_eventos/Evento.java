@@ -45,7 +45,12 @@ public class Evento {
 
 
     public boolean adicionarParticipante(Participante p){
-        return participantes.add(p);
+        if(participantes.size() <= capacidade){
+           return participantes.add(p); 
+        }
+        
+        System.out.println("Não há mais vagas para este evento!\n");
+        return false;
     }
 
     public List<Participante> listarParticipantePorNome(){
@@ -60,7 +65,7 @@ public class Evento {
         return participantesOrdenados;
     }
 
-    public Set<Participante> buscarParticipantesPorInicial(char letra){
+    public Set<Participante> buscarParticipantePorInicial(char letra){
         Set<Participante> participantesInicial = new HashSet<>();
 
         for(Participante p : participantes){
@@ -71,5 +76,9 @@ public class Evento {
 
         return participantesInicial;
     }
-
+    
+    
+    public String toString(){
+        return "Nome: " + getNome() + " | Capacidade: " + getCapacidade() + " | Data: " + getData();
+    }
 }
