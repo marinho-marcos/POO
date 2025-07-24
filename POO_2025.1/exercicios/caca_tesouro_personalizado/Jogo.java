@@ -36,7 +36,7 @@ public class Jogo {
             int linha = random.nextInt(6);
             int coluna = random.nextInt(6);
 
-            if(tabuleiro[linha][coluna] instanceof Vazio && !(linha == 0 && coluna == 0)){
+            if(tabuleiro[linha][coluna].ehVazio() && !(linha == 0 && coluna == 0)){
                 tabuleiro[linha][coluna] = new Tesouro();
                 tesourosAdicinoados++;
             }
@@ -47,7 +47,7 @@ public class Jogo {
             int linha = random.nextInt(6);
             int coluna = random.nextInt(6);
 
-            if(tabuleiro[linha][coluna] instanceof Vazio && !(linha == 0 && coluna == 0)){
+            if(tabuleiro[linha][coluna].ehVazio() && !(linha == 0 && coluna == 0)){
                 tabuleiro[linha][coluna] = new Armadilha();
                 armadilhasAdicionadas++;
             }
@@ -106,18 +106,13 @@ public class Jogo {
 
             // interagindo com o elemento da celula visitada
             ElementoTabuleiro elemento = tabuleiro[novaLinha][novaColuna];
-            int pontos = elemento.interagir();
+            int pontos = elemento.interagir();      //polimorfismo
             jogador.adicionarPontos(pontos);
+            
+            System.out.println(elemento.mensagemInteracao());   //polimorfismo
 
-            if(elemento instanceof Tesouro){
-                System.out.println("\nVoce encontrou um TESOURO! +3 pontos.");
-                tesourosRestantes--;
-            } else if(elemento instanceof Armadilha){
-                System.out.println("\nVoce caiu em uma ARMADILHA! -2 pontos.");
-                armadilhasRestantes--;
-            } else{
-                System.out.println("\nNada aqui...");
-            }
+            if(elemento.ehTesouro()) tesourosRestantes--;
+            if(elemento.ehArmadilha()) armadilhasRestantes--;
             
             System.out.println("\n********************************************\n");
         }
@@ -142,7 +137,7 @@ public class Jogo {
 
     }
 
-    private void exibirTabuleiro() {
+    private void exibirTabuleiro(){
         System.out.println("\nTABULEIRO:");
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 6; j++){
@@ -161,15 +156,12 @@ public class Jogo {
         // caso o jogador esta na posicao
         if(i == linhaJogador && j == colunaJogador){
             ElementoTabuleiro elemento = tabuleiro[i][j];
-            
-            if(elemento instanceof Tesouro) return "🤑";
-            if(elemento instanceof Armadilha) return "💀";
-            return jogador.simbolo();
+            return elemento.simboloComJogador();    //polimorfismo
         }
         
         // caso ja tenha sido revelado
         if(jogador.jaVisitou(i, j)){
-            return tabuleiro[i][j].simbolo();
+            return tabuleiro[i][j].simbolo();   //polimorfismo
         }
         
         // caso posicao seja vazia
@@ -181,7 +173,7 @@ public class Jogo {
         System.out.println("\nTABULEIRO REVELADO:");
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                System.out.printf("%s ", tabuleiro[i][j].simbolo());
+                System.out.printf("%s ", tabuleiro[i][j].simbolo());    //polimorfismo
             }
         System.out.println(); // nova linha
         }

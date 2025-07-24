@@ -5,12 +5,16 @@ public class Jogador {
     private int pontuacao;
     private int linha;
     private int coluna;
+    private Tesouro tesouro;
+    private Armadilha armadilha;
     private Set<String> visitados;
 
     public Jogador(){
         this.pontuacao = 0;
         this.linha = 0;
         this.coluna = 0;
+        this.tesouro = new Tesouro();
+        this.armadilha = new Armadilha();
         visitados = new HashSet<>();
     }
 
@@ -45,7 +49,9 @@ public class Jogador {
         registrarVisita(linha, coluna);
     }
 
-    public String simbolo(){
+    public String simbolo(ElementoTabuleiro elemento){
+        if(elemento instanceof Tesouro) return tesouro.simbolo();
+        if(elemento instanceof Armadilha) return armadilha.simbolo();
         return "🙂";
     }
 }
