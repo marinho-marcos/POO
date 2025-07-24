@@ -1,6 +1,6 @@
 public class Vazio extends ElementoTabuleiro {
-    public int interagir(){
-        return 0;
+    public void interagir(Jogador jogador){
+        System.out.println("\nNada aqui...");
     }
 
     public String simbolo(){
@@ -9,15 +9,6 @@ public class Vazio extends ElementoTabuleiro {
     
     public String simboloComJogador(){
         return "🙂";
-    }
-    
-    public String mensagemInteracao(){
-        return "\nNada aqui...";
-    }
-    
-    @Override
-    public boolean ehVazio(){
-        return true;
     }
     
 }

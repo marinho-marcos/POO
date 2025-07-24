@@ -3,23 +3,29 @@ import java.util.HashSet;
 
 public class Jogador {
     private int pontuacao;
+    private int movimentos;
     private int linha;
     private int coluna;
-    private Tesouro tesouro;
-    private Armadilha armadilha;
+    private int tesouros;
+    private int armadilhas;
     private Set<String> visitados;
 
     public Jogador(){
         this.pontuacao = 0;
+        this.movimentos = 10;
         this.linha = 0;
         this.coluna = 0;
-        this.tesouro = new Tesouro();
-        this.armadilha = new Armadilha();
+        this.tesouros = 3;
+        this.armadilhas = 3;
         visitados = new HashSet<>();
     }
 
     public int getPontuacao(){
         return pontuacao;
+    }
+
+    public int getMovimentos(){
+        return movimentos;
     }
 
     public int getLinha(){
@@ -28,6 +34,30 @@ public class Jogador {
 
     public int getColuna(){
         return coluna;
+    }
+
+    public int getTesouros(){
+        return tesouros;
+    }
+
+    public int getArmadilhas(){
+        return armadilhas;
+    }
+
+    public void setTesouros(int tesouro){
+        this.tesouros = tesouro;
+    }
+
+    public void setArmadilhas(int armadilha){
+        this.armadilhas = armadilha;
+    }
+
+    public void setPontuacao(int pontuacao){
+        this.pontuacao = pontuacao;
+    }
+
+    public void setMovimentos(int movimento){
+        this.movimentos = movimento;
     }
 
     public void adicionarPontos(int ponto){
@@ -47,11 +77,6 @@ public class Jogador {
         this.linha = linha;
         this.coluna = coluna;
         registrarVisita(linha, coluna);
-    }
-
-    public String simbolo(ElementoTabuleiro elemento){
-        if(elemento instanceof Tesouro) return tesouro.simbolo();
-        if(elemento instanceof Armadilha) return armadilha.simbolo();
-        return "🙂";
+        setMovimentos(getMovimentos() - 1);
     }
 }

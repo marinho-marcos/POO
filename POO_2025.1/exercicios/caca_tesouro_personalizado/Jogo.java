@@ -4,16 +4,10 @@ import java.util.Scanner;
 public class Jogo {
     private ElementoTabuleiro[][] tabuleiro;
     private Jogador jogador;
-    private int movimentosRestantes;
-    private int tesourosRestantes;
-    private int armadilhasRestantes;
 
     public Jogo(){
         tabuleiro = new ElementoTabuleiro[6][6];
         jogador = new Jogador();
-        movimentosRestantes = 10;
-        tesourosRestantes = 3;
-        armadilhasRestantes = 3;
 
         inicializarTabuleiro();
         jogador.registrarVisita(0, 0);
@@ -36,7 +30,7 @@ public class Jogo {
             int linha = random.nextInt(6);
             int coluna = random.nextInt(6);
 
-            if(tabuleiro[linha][coluna].ehVazio() && !(linha == 0 && coluna == 0)){
+            if(tabuleiro[linha][coluna].simbolo().equals("⬜") && !(linha == 0 && coluna == 0)){
                 tabuleiro[linha][coluna] = new Tesouro();
                 tesourosAdicinoados++;
             }
@@ -47,7 +41,7 @@ public class Jogo {
             int linha = random.nextInt(6);
             int coluna = random.nextInt(6);
 
-            if(tabuleiro[linha][coluna].ehVazio() && !(linha == 0 && coluna == 0)){
+            if(tabuleiro[linha][coluna].simbolo().equals("⬜") && !(linha == 0 && coluna == 0)){
                 tabuleiro[linha][coluna] = new Armadilha();
                 armadilhasAdicionadas++;
             }
@@ -57,11 +51,11 @@ public class Jogo {
     public void executar(){
         Scanner scanner = new Scanner(System.in);
 
-        while(movimentosRestantes > 0 && tesourosRestantes > 0){
+        while(jogador.getMovimentos() > 0 && jogador.getTesouros() > 0){
             exibirTabuleiro();
 
             System.out.println("Pontuacao: " + jogador.getPontuacao());
-            System.out.println("Movimentos restantes: " + movimentosRestantes);
+            System.out.println("Movimentos restantes: " + jogador.getMovimentos());
             System.out.print("\nDigite um comando (W/A/S/D): ");
 
             String comando = scanner.nextLine().toUpperCase();
@@ -102,19 +96,13 @@ public class Jogo {
 
             // registrando movimento valido
             jogador.moverPara(novaLinha, novaColuna);
-            movimentosRestantes--;
 
             // interagindo com o elemento da celula visitada
             ElementoTabuleiro elemento = tabuleiro[novaLinha][novaColuna];
-            int pontos = elemento.interagir();      //polimorfismo
-            jogador.adicionarPontos(pontos);
-            
-            System.out.println(elemento.mensagemInteracao());   //polimorfismo
-
-            if(elemento.ehTesouro()) tesourosRestantes--;
-            if(elemento.ehArmadilha()) armadilhasRestantes--;
+            elemento.interagir(jogador);      //polimorfismo
             
             System.out.println("\n********************************************\n");
+
         }
         
         exibirTabuleiro();
@@ -124,7 +112,7 @@ public class Jogo {
         
         revelarTabuleiro();
         
-        if(movimentosRestantes == 0){
+        if(jogador.getMovimentos() == 0){
             System.out.println("\nSeus movimentos acabaram!");
         } else {
             System.out.println("\nVocê encontrou todos os tesouros!");
@@ -132,9 +120,10 @@ public class Jogo {
         
         System.out.println("\n===== STATUS =====");
         System.out.println("Pontuacao final: " + jogador.getPontuacao());
-        System.out.println("Tesouros: " + (3 - tesourosRestantes));
-        System.out.println("Armadilhas: " + (3 - armadilhasRestantes));
+        System.out.println("Tesouros: " + (3 - jogador.getTesouros()));
+        System.out.println("Armadilhas: " + (3 - jogador.getArmadilhas()));
 
+        scanner.close();
     }
 
     private void exibirTabuleiro(){

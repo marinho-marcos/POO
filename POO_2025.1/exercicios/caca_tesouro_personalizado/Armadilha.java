@@ -1,6 +1,9 @@
 public class Armadilha extends ElementoTabuleiro{
-    public int interagir(){
-        return -2;
+    public void interagir(Jogador jogador){
+        jogador.setPontuacao(jogador.getPontuacao() - 2);
+        jogador.setArmadilhas(jogador.getArmadilhas() - 1);
+
+        System.out.println("\nVoce caiu em uma ARMADILHA! -2 pontos.");
     }
 
     public String simbolo(){
@@ -9,14 +12,5 @@ public class Armadilha extends ElementoTabuleiro{
     
     public String simboloComJogador(){
         return "💀";
-    }
-    
-    public String mensagemInteracao(){
-        return "\nVoce caiu em uma ARMADILHA! -2 pontos.";
-    }
-    
-    @Override
-    public boolean ehArmadilha(){
-        return true;
     }
 }

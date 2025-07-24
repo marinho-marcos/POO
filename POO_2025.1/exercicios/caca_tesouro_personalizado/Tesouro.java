@@ -1,6 +1,9 @@
 public class Tesouro extends ElementoTabuleiro {
-    public int interagir(){
-        return 3;
+    public void interagir(Jogador jogador){
+        jogador.setPontuacao(jogador.getPontuacao() + 3);
+        jogador.setTesouros(jogador.getTesouros() - 1);
+
+        System.out.println("\nVoce encontrou um TESOURO! +3 pontos.");
     }
 
     public String simbolo(){
@@ -9,14 +12,5 @@ public class Tesouro extends ElementoTabuleiro {
     
     public String simboloComJogador(){
         return "🤑";
-    }
-    
-    public String mensagemInteracao(){
-        return "\nVoce encontrou um TESOURO! +3 pontos.";
-    }
-    
-    @Override
-    public boolean ehTesouro(){
-        return true;
     }
 }
